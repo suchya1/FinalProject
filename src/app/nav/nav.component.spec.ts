@@ -1,26 +1,25 @@
-import { NO_ERRORS_SCHEMA } from "@angular/core";
-import { NavComponent } from "./nav.component";
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-describe("NavComponent", () => {
+import { NavComponent } from './nav.component';
 
-  let fixture: ComponentFixture<NavComponent>;
+describe('NavComponent', () => {
   let component: NavComponent;
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      schemas: [NO_ERRORS_SCHEMA],
-      providers: [
-      ],
-      declarations: [NavComponent]
-    });
+  let fixture: ComponentFixture<NavComponent>;
 
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ NavComponent ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
     fixture = TestBed.createComponent(NavComponent);
     component = fixture.componentInstance;
-
+    fixture.detectChanges();
   });
 
-  it("should be able to create component instance", () => {
-    expect(component).toBeDefined();
+  it('should create', () => {
+    expect(component).toBeTruthy();
   });
-  
 });
