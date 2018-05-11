@@ -6,7 +6,9 @@
             <ul class="list-group list-group-flush my-log">
                 <li *ngFor="let item of Me.MyLog" 
                     (click)="SubmitLog($event, item)"
-                   <!--[ngClass]="{ enabled: !MyPlayedQuote() && !IAmTheDealer() }"-->
+                   <!--
+                     [ngClass]="{ enabled: !MyPlayedQuote() && !IAmTheDealer() }"
+                    -->
                     class="list-group-item" >
                     {{item}}
                 </li>

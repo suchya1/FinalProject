@@ -12,7 +12,7 @@ export class ExerciseService {
   constructor(private http:Http, private _Messages:MessagesService, private _Router:Router) { }
 
   login(name:string, password:string){
-    if(password=='123'){
+    if(password=='a123'){
        //log the user in
        this.Me={Name:name,MyLog:[],MyHistory:[]};
        this._Router.navigate(['/log']);

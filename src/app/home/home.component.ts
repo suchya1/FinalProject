@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { MessagesService } from '../services/messages.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -7,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _Messages:MessagesService) { 
+    this._Messages.Messages.push({Text:'New! You can now complete daily tasks!',Type:'info'});
+  }
 
   ngOnInit() {
   }

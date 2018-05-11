@@ -130,7 +130,7 @@ module.exports = ""
 /***/ "./src/app/exercise/exercise.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\" >\n    <div class=\"col-md-4\">\n        \n        <div class=\"card\" >\n            <div class=\"card-header\">My Log {{Me.Name}} </div>\n            <ul class=\"list-group list-group-flush my-log\">\n                <li *ngFor=\"let item of Me.MyLog\" \n                    (click)=\"SubmitLog($event, item)\"\n                   <!--[ngClass]=\"{ enabled: !MyPlayedQuote() && !IAmTheDealer() }\"-->\n                    class=\"list-group-item\" >\n                    {{item}}\n                </li>\n            </ul>\n          </div>\n    </div>"
+module.exports = "<div class=\"row\" >\n    <div class=\"col-md-4\">\n        \n        <div class=\"card\" >\n            <div class=\"card-header\">My Log {{Me.Name}} </div>\n            <ul class=\"list-group list-group-flush my-log\">\n                <li *ngFor=\"let item of Me.MyLog\" \n                    (click)=\"SubmitLog($event, item)\"\n                   <!--\n                     [ngClass]=\"{ enabled: !MyPlayedQuote() && !IAmTheDealer() }\"\n                    -->\n                    class=\"list-group-item\" >\n                    {{item}}\n                </li>\n            </ul>\n          </div>\n    </div>"
 
 /***/ }),
 
@@ -152,16 +152,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var http_1 = __webpack_require__("./node_modules/@angular/http/esm5/http.js");
 var router_1 = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
-var ex_1 = __webpack_require__("./src/app/models/ex.ts"); //Activity????
+var ex_1 = __webpack_require__("./src/app/models/ex.ts");
+var messages_service_1 = __webpack_require__("./src/app/services/messages.service.ts");
 var ExerciseComponent = /** @class */ (function () {
     function ExerciseComponent(//add in services
-        http, _Router) {
+        http, _Router, _Messages) {
         var _this = this;
         this.http = http;
         this._Router = _Router;
+        this._Messages = _Messages;
         this.Model = new ex_1.Ex();
         // A:Activity;
-        this._api = "http://localhost:8080/game";
+        this._api = "http://localhost:8080/exercise";
         setInterval(function () { return _this.refresh(); }, 1000);
     }
     ExerciseComponent.prototype.ngOnInit = function () {
@@ -183,6 +185,9 @@ var ExerciseComponent = /** @class */ (function () {
             console.log(err);
         });
     };
+    ExerciseComponent.prototype.join = function (name) {
+        this._Messages.Messages.push({ Text: 'Welcome', Type: 'info' });
+    };
     ExerciseComponent = __decorate([
         core_1.Component({
             selector: 'app-exercise',
@@ -190,7 +195,8 @@ var ExerciseComponent = /** @class */ (function () {
             styles: [__webpack_require__("./src/app/exercise/exercise.component.css")]
         }),
         __metadata("design:paramtypes", [http_1.Http,
-            router_1.Router])
+            router_1.Router,
+            messages_service_1.MessagesService])
     ], ExerciseComponent);
     return ExerciseComponent;
 }());
@@ -209,7 +215,7 @@ module.exports = ""
 /***/ "./src/app/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div id=\"alerts\"></div>\n  <div class=\"alert alert-info\">\n        <a href=\"/login\" class=\"btn btn-info\">Login</a>\n        <a href=\"/register\" class=\"btn btn-info\">Register</a>\n   </div>\n  <div class=\"alert alert-info\">\n      <b>New!</b> You can now complete daily tasks!\n      <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n          <span aria-hidden=\"true\">&times;</span>\n      </button>\n  </div>\n  <div class=\"row\">\n      <div class=\"col-lg-4 col-sm-6\">\n              <div class=\"card\" >\n                  <div class=\"card-header\" style=\"background:linear-gradient(to bottom, #E684AE,rgb(245, 165, 189))\">\n                      <button type=\"button\" class=\"close\" data-dismiss=\"card\" aria-label=\"Close\">\n                          <span aria-hidden=\"true\">&times;</span>\n                      </button>  \n                      <h5 style=\"color:#fff\">My Log</h5>                      \n                  </div>\n                      <img class=\"\" style=\"height:255px\" src=\"https://www.inlifehealthcare.com/wp-content/uploads/2017/08/AAEAAQAAAAAAAAgzAAAAJGIyNzE4NDllLTEyNjItNGFiNC05YzRlLTU0NjU5ZDYxMjAwYw-533x400.jpg\" alt=\"Card image cap\">\n                      <div class=\"card-body\">\n                        <p class=\"card-text\">Add Cardio (running/walking)<br>Add Strength (lifting/weights)<br>Add a Sport<br>Add other exercise</p>\n                        <a href=\"/log\" class=\"btn btn-info\">Go to log</a>\n                      </div>\n                    </div>\n      </div>\n      <div class=\"col-lg-4 col-sm-6\">\n          <div class=\"card\" >\n              <div class=\"card-header\" style=\"background:linear-gradient(to bottom, #E684AE,rgb(245, 165, 189))\">\n                  <button type=\"button\" class=\"close\" data-dismiss=\"card\" aria-label=\"Close\">\n                      <span aria-hidden=\"true\">&times;</span>\n                  </button>  \n                  <h5 style=\"color:#fff\">My History</h5>                      \n              </div>\n                  <img class=\"\" src=\"https://i.pinimg.com/originals/3a/cf/c1/3acfc1a45a7bfe2bd7f214e68f5a26e2.jpg\" alt=\"Card image cap\">\n                  <div class=\"card-body\" >\n                    <p class=\"card-text\">See your previous activity<br><br><br><br></p>\n                    <a href=\"/history\" class=\"btn btn-info\">See History</a>\n                  </div>\n                </div>\n      </div>  \n      <div class=\"col-lg-4 col-sm-6\">\n          <div class=\"card\" >\n              <div class=\"card-header\" style=\"background:linear-gradient(to bottom, #E684AE,rgb(245, 165, 189))\">\n                  <button type=\"button\" class=\"close\" data-dismiss=\"card\" aria-label=\"Close\">\n                      <span aria-hidden=\"true\">&times;</span>\n                  </button>  \n                  <h5 style=\"color:#fff\">Share with friends</h5>                      \n              </div>\n                  <img class=\"\" style=\"height:255px\" src=\"http://sweatdallas.com/wp-content/uploads/2015/07/ClassTriColourBanner.jpg\" alt=\"Card image cap\">\n                  <div class=\"card-body\">\n                    <p class=\"card-text\">Share updates or history with friends!<br><br><br><br></p>\n                    <a href=\"/social\" class=\"btn btn-info\">Share Now!</a>\n                  </div>\n                </div>\n      </div>  \n  </div>\n</div>"
+module.exports = "<div class=\"container\">\n  <div id=\"alerts\"></div>\n  <div class=\"alert alert-info\">\n        <a href=\"/login\" class=\"btn btn-info\">Login</a>\n        <a href=\"/register\" class=\"btn btn-info\">Register</a>\n   </div>\n   <!--<div class=\"alert alert-info\">\n    <b>New!</b> You can now complete daily tasks!\n    <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n        <span aria-hidden=\"true\">&times;</span>\n    </button>\n    </div>-->\n\n  <div class=\"row\">\n      <div class=\"col-lg-4 col-sm-6\">\n              <div class=\"card\" >\n                  <div class=\"card-header\" style=\"background:linear-gradient(to bottom, #E684AE,rgb(245, 165, 189))\">\n                      <h5 style=\"color:#fff\">My Log</h5>                      \n                  </div>\n                      <img class=\"\" style=\"height:255px\" src=\"https://www.inlifehealthcare.com/wp-content/uploads/2017/08/AAEAAQAAAAAAAAgzAAAAJGIyNzE4NDllLTEyNjItNGFiNC05YzRlLTU0NjU5ZDYxMjAwYw-533x400.jpg\" alt=\"Card image cap\">\n                      <div class=\"card-body\">\n                        <p class=\"card-text\">Add Cardio (running/walking)<br>Add Strength (lifting/weights)<br>Add a Sport<br>Add other exercise</p>\n                        <a href=\"/log\" class=\"btn btn-info\">Go to log</a>\n                      </div>\n                    </div>\n      </div>\n      <div class=\"col-lg-4 col-sm-6\">\n          <div class=\"card\" >\n              <div class=\"card-header\" style=\"background:linear-gradient(to bottom, #E684AE,rgb(245, 165, 189))\">\n                  <h5 style=\"color:#fff\">My History</h5>                      \n              </div>\n                  <img class=\"\" src=\"https://i.pinimg.com/originals/3a/cf/c1/3acfc1a45a7bfe2bd7f214e68f5a26e2.jpg\" alt=\"Card image cap\">\n                  <div class=\"card-body\" >\n                    <p class=\"card-text\">See your previous activity<br><br><br><br></p>\n                    <a href=\"/history\" class=\"btn btn-info\">See History</a>\n                  </div>\n                </div>\n      </div>  \n      <div class=\"col-lg-4 col-sm-6\">\n          <div class=\"card\" >\n              <div class=\"card-header\" style=\"background:linear-gradient(to bottom, #E684AE,rgb(245, 165, 189))\">\n                 <h5 style=\"color:#fff\">Share with friends</h5>                      \n              </div>\n                  <img class=\"\" style=\"height:255px\" src=\"http://sweatdallas.com/wp-content/uploads/2015/07/ClassTriColourBanner.jpg\" alt=\"Card image cap\">\n                  <div class=\"card-body\">\n                    <p class=\"card-text\">Share updates or history with friends!<br><br><br><br></p>\n                    <a href=\"/social\" class=\"btn btn-info\">Share Now!</a>\n                  </div>\n                </div>\n      </div>  \n  </div>\n</div>"
 
 /***/ }),
 
@@ -229,8 +235,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var messages_service_1 = __webpack_require__("./src/app/services/messages.service.ts");
 var HomeComponent = /** @class */ (function () {
-    function HomeComponent() {
+    function HomeComponent(_Messages) {
+        this._Messages = _Messages;
+        this._Messages.Messages.push({ Text: 'New! You can now complete daily tasks!', Type: 'info' });
     }
     HomeComponent.prototype.ngOnInit = function () {
     };
@@ -240,7 +249,7 @@ var HomeComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/home/home.component.html"),
             styles: [__webpack_require__("./src/app/home/home.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [messages_service_1.MessagesService])
     ], HomeComponent);
     return HomeComponent;
 }());
@@ -314,7 +323,7 @@ module.exports = ""
 /***/ "./src/app/messages/messages.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  messages works!\n</p>\n"
+module.exports = "<div id=\"messages\">\n  <div class=\"alert alert-{{message.Type}}\" *ngFor=\"let message of Messages.Messages; let i = index;\">\n    <button class=\"close\" (click)=\"delete(i)\">&times;</button> \n      {{message.Text}}\n  </div>    \n</div>\n<!--<button class=\"close\" (click)=\"delete(i)\">&times;</button>-->\n<!--<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n      <span aria-hidden=\"true\">&times;</span>\n    </button>  \n      {{message.Text}}-->"
 
 /***/ }),
 
@@ -334,10 +343,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var messages_service_1 = __webpack_require__("./src/app/services/messages.service.ts");
 var MessagesComponent = /** @class */ (function () {
-    function MessagesComponent() {
+    function MessagesComponent(Messages) {
+        this.Messages = Messages;
     }
     MessagesComponent.prototype.ngOnInit = function () {
+    };
+    MessagesComponent.prototype.delete = function (i) {
+        this.Messages.Messages.splice(i, 1);
     };
     MessagesComponent = __decorate([
         core_1.Component({
@@ -345,7 +359,7 @@ var MessagesComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/messages/messages.component.html"),
             styles: [__webpack_require__("./src/app/messages/messages.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [messages_service_1.MessagesService])
     ], MessagesComponent);
     return MessagesComponent;
 }());
@@ -459,7 +473,7 @@ var ExerciseService = /** @class */ (function () {
         this._Router = _Router;
     }
     ExerciseService.prototype.login = function (name, password) {
-        if (password == '123') {
+        if (password == 'a123') {
             //log the user in
             this.Me = { Name: name, MyLog: [], MyHistory: [] };
             this._Router.navigate(['/log']);
@@ -494,6 +508,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var MessagesService = /** @class */ (function () {
     function MessagesService() {
+        this.Messages = [];
     }
     MessagesService = __decorate([
         core_1.Injectable(),
