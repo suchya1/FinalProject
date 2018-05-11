@@ -209,7 +209,7 @@ module.exports = ""
 /***/ "./src/app/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div id=\"alerts\"></div>\n  <div class=\"alert alert-info\">\n      <b>New!</b> You can now complete daily tasks!\n      <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n          <span aria-hidden=\"true\">&times;</span>\n      </button>\n  </div>\n \n  <div class=\"row\">\n      <div class=\"col-lg-4 col-sm-6\">\n              <div class=\"card\" >\n                  <div class=\"card-header\" style=\"background:linear-gradient(to bottom, #E684AE,rgb(245, 165, 189))\">\n                      <button type=\"button\" class=\"close\" data-dismiss=\"card\" aria-label=\"Close\">\n                          <span aria-hidden=\"true\">&times;</span>\n                      </button>  \n                      <h5 style=\"color:#fff\">My Log</h5>                      \n                  </div>\n                      <img class=\"\" style=\"height:255px\" src=\"https://www.inlifehealthcare.com/wp-content/uploads/2017/08/AAEAAQAAAAAAAAgzAAAAJGIyNzE4NDllLTEyNjItNGFiNC05YzRlLTU0NjU5ZDYxMjAwYw-533x400.jpg\" alt=\"Card image cap\">\n                      <div class=\"card-body\">\n                        <p class=\"card-text\">Add Cardio (running/walking)<br>Add Strength (lifting/weights)<br>Add a Sport<br>Add other exercise</p>\n                        <a href=\"/log\" class=\"btn btn-info\">Go to log</a>\n                      </div>\n                    </div>\n      </div>\n      <div class=\"col-lg-4 col-sm-6\">\n          <div class=\"card\" >\n              <div class=\"card-header\" style=\"background:linear-gradient(to bottom, #E684AE,rgb(245, 165, 189))\">\n                  <button type=\"button\" class=\"close\" data-dismiss=\"card\" aria-label=\"Close\">\n                      <span aria-hidden=\"true\">&times;</span>\n                  </button>  \n                  <h5 style=\"color:#fff\">My History</h5>                      \n              </div>\n                  <img class=\"\" src=\"https://i.pinimg.com/originals/3a/cf/c1/3acfc1a45a7bfe2bd7f214e68f5a26e2.jpg\" alt=\"Card image cap\">\n                  <div class=\"card-body\" >\n                    <p class=\"card-text\">See your previous activity<br><br><br><br></p>\n                    <a href=\"/history\" class=\"btn btn-info\">See History</a>\n                  </div>\n                </div>\n      </div>  \n      <div class=\"col-lg-4 col-sm-6\">\n          <div class=\"card\" >\n              <div class=\"card-header\" style=\"background:linear-gradient(to bottom, #E684AE,rgb(245, 165, 189))\">\n                  <button type=\"button\" class=\"close\" data-dismiss=\"card\" aria-label=\"Close\">\n                      <span aria-hidden=\"true\">&times;</span>\n                  </button>  \n                  <h5 style=\"color:#fff\">Share with friends</h5>                      \n              </div>\n                  <img class=\"\" style=\"height:255px\" src=\"http://sweatdallas.com/wp-content/uploads/2015/07/ClassTriColourBanner.jpg\" alt=\"Card image cap\">\n                  <div class=\"card-body\">\n                    <p class=\"card-text\">Share updates or history with friends!<br><br><br><br></p>\n                    <a href=\"/social\" class=\"btn btn-info\">Share Now!</a>\n                  </div>\n                </div>\n      </div>  \n  </div>\n</div>"
+module.exports = "<div class=\"container\">\n  <div id=\"alerts\"></div>\n  <div class=\"alert alert-info\">\n        <a href=\"/login\" class=\"btn btn-info\">Login</a>\n        <a href=\"/register\" class=\"btn btn-info\">Register</a>\n   </div>\n  <div class=\"alert alert-info\">\n      <b>New!</b> You can now complete daily tasks!\n      <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n          <span aria-hidden=\"true\">&times;</span>\n      </button>\n  </div>\n  <div class=\"row\">\n      <div class=\"col-lg-4 col-sm-6\">\n              <div class=\"card\" >\n                  <div class=\"card-header\" style=\"background:linear-gradient(to bottom, #E684AE,rgb(245, 165, 189))\">\n                      <button type=\"button\" class=\"close\" data-dismiss=\"card\" aria-label=\"Close\">\n                          <span aria-hidden=\"true\">&times;</span>\n                      </button>  \n                      <h5 style=\"color:#fff\">My Log</h5>                      \n                  </div>\n                      <img class=\"\" style=\"height:255px\" src=\"https://www.inlifehealthcare.com/wp-content/uploads/2017/08/AAEAAQAAAAAAAAgzAAAAJGIyNzE4NDllLTEyNjItNGFiNC05YzRlLTU0NjU5ZDYxMjAwYw-533x400.jpg\" alt=\"Card image cap\">\n                      <div class=\"card-body\">\n                        <p class=\"card-text\">Add Cardio (running/walking)<br>Add Strength (lifting/weights)<br>Add a Sport<br>Add other exercise</p>\n                        <a href=\"/log\" class=\"btn btn-info\">Go to log</a>\n                      </div>\n                    </div>\n      </div>\n      <div class=\"col-lg-4 col-sm-6\">\n          <div class=\"card\" >\n              <div class=\"card-header\" style=\"background:linear-gradient(to bottom, #E684AE,rgb(245, 165, 189))\">\n                  <button type=\"button\" class=\"close\" data-dismiss=\"card\" aria-label=\"Close\">\n                      <span aria-hidden=\"true\">&times;</span>\n                  </button>  \n                  <h5 style=\"color:#fff\">My History</h5>                      \n              </div>\n                  <img class=\"\" src=\"https://i.pinimg.com/originals/3a/cf/c1/3acfc1a45a7bfe2bd7f214e68f5a26e2.jpg\" alt=\"Card image cap\">\n                  <div class=\"card-body\" >\n                    <p class=\"card-text\">See your previous activity<br><br><br><br></p>\n                    <a href=\"/history\" class=\"btn btn-info\">See History</a>\n                  </div>\n                </div>\n      </div>  \n      <div class=\"col-lg-4 col-sm-6\">\n          <div class=\"card\" >\n              <div class=\"card-header\" style=\"background:linear-gradient(to bottom, #E684AE,rgb(245, 165, 189))\">\n                  <button type=\"button\" class=\"close\" data-dismiss=\"card\" aria-label=\"Close\">\n                      <span aria-hidden=\"true\">&times;</span>\n                  </button>  \n                  <h5 style=\"color:#fff\">Share with friends</h5>                      \n              </div>\n                  <img class=\"\" style=\"height:255px\" src=\"http://sweatdallas.com/wp-content/uploads/2015/07/ClassTriColourBanner.jpg\" alt=\"Card image cap\">\n                  <div class=\"card-body\">\n                    <p class=\"card-text\">Share updates or history with friends!<br><br><br><br></p>\n                    <a href=\"/social\" class=\"btn btn-info\">Share Now!</a>\n                  </div>\n                </div>\n      </div>  \n  </div>\n</div>"
 
 /***/ }),
 
@@ -259,7 +259,7 @@ module.exports = ""
 /***/ "./src/app/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  login works!\n</p>\n"
+module.exports = "<div class=\"row justified-content-center\">\n    <div class=\"col-md-6\">\n        \n        <div class=\"card\" >\n            <div class=\"card-header\">Login</div>\n            <div class=\"card-body\">\n              <div class=\"row\">\n               <div class=\"col\">\n                 <!--\n                 <button class=\"btn btn-block border-success bg-light\" (click)=\"fblogin()\">Login with Facebook</button>\n                 <button class=\"btn btn-block border-success bg-light\" (click)=\"googlelogin()\">Login with Google</button>\n                 -->\n               </div>\n               <div class=\"col\">\n                  <input #Name placeholder=\"User Name\" />\n                  <input #Password placeholder=\"Password\" />\n                  <button (click)=\"login(Name.value, Password.value)\" >Login</button>\n               </div>\n              </div>\n            </div>\n          </div>\n    </div>"
 
 /***/ }),
 
@@ -279,10 +279,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var exercise_service_1 = __webpack_require__("./src/app/services/exercise.service.ts");
 var LoginComponent = /** @class */ (function () {
-    function LoginComponent() {
+    function LoginComponent(_Ex) {
+        this._Ex = _Ex;
     }
     LoginComponent.prototype.ngOnInit = function () {
+    };
+    LoginComponent.prototype.login = function (name, password) {
+        this._Ex.login(name, password);
     };
     LoginComponent = __decorate([
         core_1.Component({
@@ -290,7 +295,7 @@ var LoginComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/login/login.component.html"),
             styles: [__webpack_require__("./src/app/login/login.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [exercise_service_1.ExerciseService])
     ], LoginComponent);
     return LoginComponent;
 }());
@@ -388,7 +393,7 @@ module.exports = ""
 /***/ "./src/app/nav/nav.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-sm navbar-dark bg-primary\" style=\"background:linear-gradient(to bottom, #E684AE,rgb(245, 165, 189))\">\n    <div class=\"container\">\n      <a class=\"navbar-brand\" href=\"#\">Exercise App</a>\n      <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNav\" aria-controls=\"navbarNav\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n          <span class=\"navbar-toggler-icon\"></span>\n      </button>\n      <div class=\"collapse navbar-collapse\" id=\"navbarNav\">\n          <ul class=\"navbar-nav\">\n              <li class=\"nav-item\">\n              <a class=\"nav-link\" routerLink=\"/home\" routerLinkActive=\"active\" >Home <span class=\"sr-only\">(current)</span></a>\n              </li>\n              <li class=\"nav-item\">\n              <a class=\"nav-link\" routerLink=\"/exercise\" routerLinkActive=\"active\" >Current Activities</a>\n              </li>\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" routerLink=\"/history\" routerLinkActive=\"active\" >History</a>\n              </li>\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" routerLink=\"/social\" routerLinkActive=\"active\" >Social</a>\n              </li>\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" routerLink=\"/log\" routerLinkActive=\"active\" >Log</a>\n              </li>\n          </ul>\n          </div>\n      </div>\n</nav>"
+module.exports = "<nav class=\"navbar navbar-expand-sm navbar-dark bg-primary\" style=\"background:linear-gradient(to bottom, #E684AE,rgb(245, 165, 189))\">\n    <div class=\"container\">\n      <a class=\"navbar-brand\" href=\"#\">Exercise App</a>\n      <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNav\" aria-controls=\"navbarNav\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n          <span class=\"navbar-toggler-icon\"></span>\n      </button>\n      <div class=\"collapse navbar-collapse\" id=\"navbarNav\">\n          <ul class=\"navbar-nav\">\n              <li class=\"nav-item\">\n              <a class=\"nav-link\" href=\"/home\" routerLinkActive=\"active\" >Home <span class=\"sr-only\">(current)</span></a>\n              </li>\n              <li class=\"nav-item\">\n              <a class=\"nav-link\" href=\"/exercise\" routerLinkActive=\"active\" >Current Activities</a>\n              </li>\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" href=\"/history\" routerLinkActive=\"active\" >History</a>\n              </li>\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" href=\"/share\" routerLinkActive=\"active\" >Share</a>\n              </li>\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" href=\"/log\" routerLinkActive=\"active\" >Log</a>\n              </li>\n          </ul>\n          </div>\n      </div>\n</nav>"
 
 /***/ }),
 
@@ -444,12 +449,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var http_1 = __webpack_require__("./node_modules/@angular/http/esm5/http.js");
+var messages_service_1 = __webpack_require__("./src/app/services/messages.service.ts");
+var router_1 = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
 var ExerciseService = /** @class */ (function () {
-    function ExerciseService() {
+    function ExerciseService(http, _Messages, _Router) {
+        this.http = http;
+        this._Messages = _Messages;
+        this._Router = _Router;
     }
+    ExerciseService.prototype.login = function (name, password) {
+        if (password == '123') {
+            //log the user in
+            this.Me = { Name: name, MyLog: [], MyHistory: [] };
+            this._Router.navigate(['/log']);
+        }
+    };
     ExerciseService = __decorate([
         core_1.Injectable(),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [http_1.Http, messages_service_1.MessagesService, router_1.Router])
     ], ExerciseService);
     return ExerciseService;
 }());
