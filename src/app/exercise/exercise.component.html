@@ -1,3 +1,15 @@
-<p>
-  exercise works!
-</p>
+<div class="row" >
+    <div class="col-md-4">
+        
+        <div class="card" >
+            <div class="card-header">My Log {{Me.Name}} </div>
+            <ul class="list-group list-group-flush my-log">
+                <li *ngFor="let item of Me.MyLog" 
+                    (click)="SubmitLog($event, item)"
+                   <!--[ngClass]="{ enabled: !MyPlayedQuote() && !IAmTheDealer() }"-->
+                    class="list-group-item" >
+                    {{item}}
+                </li>
+            </ul>
+          </div>
+    </div>

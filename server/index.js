@@ -3,7 +3,7 @@ const path=require('path');
 const bodyParser=require('body-parser');
 
 const simple = require('./simpleController');
-const game = require('./ex/controller');
+const exercise = require('./ex/controller');
 
 
 var app = express()

@@ -1,15 +1,16 @@
 export class Ex {
    
     Users: User[];
-    DoneTips: Tip[];
+    SharedLog: Activity[];
 }
 
 export class User {
     Name: string;
-    MyTips: string[];
+    MyLog: Activity[];
+    MyHistory: string[];
 }
 
-export class Tip {
+export class Activity {
     Text: string;
     UserId: string;
     Chosen: boolean = false;
