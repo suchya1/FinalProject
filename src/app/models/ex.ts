@@ -5,6 +5,7 @@ export class Ex {
 }
 
 export class User {
+    UserId:string;
     Name: string;
     MyLog: string[];
     MyHistory: string[];

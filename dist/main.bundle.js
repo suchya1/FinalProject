@@ -285,7 +285,7 @@ module.exports = ""
 /***/ "./src/app/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row justified-content-center\">\n    <div class=\"col-md-6\">\n        \n        <div class=\"card\" >\n            <div class=\"card-header\">Login</div>\n            <div class=\"card-body\">\n              <div class=\"row\">\n               <div class=\"col\">\n                 <!--\n                 <button class=\"btn btn-block border-success bg-light\" (click)=\"fblogin()\">Login with Facebook</button>\n                 <button class=\"btn btn-block border-success bg-light\" (click)=\"googlelogin()\">Login with Google</button>\n                 -->\n               </div>\n               <div class=\"col\">\n                  <input #Name placeholder=\"User Name\" />\n                  <input #Password placeholder=\"Password\" />\n                  <button (click)=\"login(Name.value, Password.value)\" >Login</button>\n               </div>\n              </div>\n            </div>\n          </div>\n    </div>"
+module.exports = "<div class=\"row justified-content-center\">\n    <div class=\"col-md-6\">\n        \n        <div class=\"card\" >\n            <div class=\"card-header\">Login</div>\n            <div class=\"card-body\">\n              <div class=\"row\">\n               <div class=\"col\">\n                 <button class=\"btn btn-block border-success bg-light\" (click)=\"fblogin()\">Login with Facebook</button>\n                 <button class=\"btn btn-block border-success bg-light\" (click)=\"googlelogin()\">Login with Google</button>\n               </div>\n               <div class=\"col\">\n                  <input #Name placeholder=\"User Name\" />\n                  <input #Password placeholder=\"Password\" />\n                  <button (click)=\"login(Name.value, Password.value)\" >Login</button>\n               </div>\n              </div>\n            </div>\n          </div>\n    </div>"
 
 /***/ }),
 
@@ -309,11 +309,53 @@ var exercise_service_1 = __webpack_require__("./src/app/services/exercise.servic
 var LoginComponent = /** @class */ (function () {
     function LoginComponent(_Ex) {
         this._Ex = _Ex;
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '2263577020339632',
+                cookie: true,
+                xfbml: true,
+                version: 'v2.12'
+            });
+            FB.AppEvents.logPageView();
+        };
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
     }
     LoginComponent.prototype.ngOnInit = function () {
     };
+    LoginComponent.prototype.fblogin = function () {
+        FB.login(function (credentials) {
+            FB.api("/me", function (response) {
+                console.log(response);
+            });
+        }, { scope: "email" });
+    };
+    LoginComponent.prototype.googlelogin = function () {
+        var _this = this;
+        googleyolo.hint({
+            supportedAuthMethods: [
+                "https://accounts.google.com",
+            ],
+            supportedIdTokenProviders: [
+                {
+                    uri: "https://accounts.google.com",
+                    clientId: "YOUR_GOOGLE_CLIENT_ID" //put one from console
+                }
+            ]
+        }).then(function (credentials) {
+            _this._Ex.oAuthLogin(credentials.displayName, credentials.idToken, credentials.profilePicture);
+            console.log(credentials);
+        });
+    };
     LoginComponent.prototype.login = function (name, password) {
-        console.log('in lc');
         this._Ex.login(name, password);
     };
     LoginComponent = __decorate([
@@ -548,6 +590,12 @@ var ExerciseService = /** @class */ (function () {
             console.log(this.Me);
             this._Router.navigate(['/home']);
         }
+    };
+    ExerciseService.prototype.oAuthLogin = function (name, token, pic) {
+        this.Me = { Name: name, UserId: name, MyLog: [], MyHistory: [] };
+        this.pic = pic;
+        this.token = token;
+        this._Router.navigate(['/home']);
     };
     ExerciseService = __decorate([
         core_1.Injectable(),

@@ -20,4 +20,10 @@ export class ExerciseService {
        this._Router.navigate(['/home']);
     }
   }
+  oAuthLogin(name:string,token:string,pic:string){
+    this.Me={Name:name,UserId:name, MyLog:[],MyHistory:[]};
+    this.pic=pic;
+    this.token=token;
+    this._Router.navigate(['/home']);
+  }
 }
