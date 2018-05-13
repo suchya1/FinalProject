@@ -17,8 +17,8 @@ module.exports = app
             res.status(403).send({success:false,message:error.message});
         }
     })
-    .get('log',(req,res)=>
-    res.send(exercise.AddToLog(req.query.UserId,req.query.Text))
+    .get('/log',(req,res)=>
+    res.send(exercise.GetLog(req.query.UserId))
     )
     
 

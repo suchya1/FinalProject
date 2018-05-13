@@ -1,12 +1,28 @@
 var axios = require("axios");
 
-//const Log=[];
+const Activity=["running","walking","lifting","swimming","soccer"];
 
 //var iCurrent=0;
 
 function Exercise(){
-    this.Users=["Ashley"];
-    this.SharedLog=["hello"];
+    this.Users=[];
+    this.SharedLog=[];
+
+    this.IsLoggedIn=(userId)=>{
+        if(this.Users.some(x=>x.UserId==userId)){
+            return true;
+        }
+        else{
+            this.Users.push({UserId:userId,Name:"A"})
+            return false;
+        }
+    }
+
+    this.GetLog=(userId)=>{
+        if(this.Users.some(x=>x.UserId==userId)){
+            return Activity;
+        }
+    }
 
     this.SubmitLog = (text, userId) => {
         this.SharedLog.push({ Text: text, UserId: playerId });

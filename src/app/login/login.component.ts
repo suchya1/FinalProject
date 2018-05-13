@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   }
   login(name:string,password:string)
     {
+      console.log('in lc')
         this._Ex.login(name,password);
     }
 }

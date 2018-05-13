@@ -11,6 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { ExerciseComponent } from './exercise/exercise.component';
 import { MessagesService } from './services/messages.service';
 import { ExerciseService } from './services/exercise.service';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { ExerciseService } from './services/exercise.service';
     NavComponent,
     MessagesComponent,
     LoginComponent,
-    ExerciseComponent
+    ExerciseComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

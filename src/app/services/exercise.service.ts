@@ -12,10 +12,12 @@ export class ExerciseService {
   constructor(private http:Http, private _Messages:MessagesService, private _Router:Router) { }
 
   login(name:string, password:string){
-    if(password=='a123'){
+    if(password=='123'){
        //log the user in
-       this.Me={Name:name,MyLog:[],MyHistory:[]};
-       this._Router.navigate(['/log']);
+       console.log('in ex service: login');
+       this.Me={Name:name,UserId:name,MyLog:[],MyHistory:[]};
+       console.log(this.Me);
+       this._Router.navigate(['/home']);
     }
   }
 }

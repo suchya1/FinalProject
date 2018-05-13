@@ -86,6 +86,7 @@ var login_component_1 = __webpack_require__("./src/app/login/login.component.ts"
 var exercise_component_1 = __webpack_require__("./src/app/exercise/exercise.component.ts");
 var messages_service_1 = __webpack_require__("./src/app/services/messages.service.ts");
 var exercise_service_1 = __webpack_require__("./src/app/services/exercise.service.ts");
+var register_component_1 = __webpack_require__("./src/app/register/register.component.ts");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -97,7 +98,8 @@ var AppModule = /** @class */ (function () {
                 nav_component_1.NavComponent,
                 messages_component_1.MessagesComponent,
                 login_component_1.LoginComponent,
-                exercise_component_1.ExerciseComponent
+                exercise_component_1.ExerciseComponent,
+                register_component_1.RegisterComponent
             ],
             imports: [
                 platform_browser_1.BrowserModule,
@@ -130,7 +132,7 @@ module.exports = ""
 /***/ "./src/app/exercise/exercise.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\" >\n    <div class=\"col-md-4\">\n        \n        <div class=\"card\" >\n            <div class=\"card-header\">My Log {{Me.Name}} </div>\n            <ul class=\"list-group list-group-flush my-log\">\n                <li *ngFor=\"let item of Me.MyLog\" \n                    (click)=\"SubmitLog($event, item)\"\n                   <!--\n                     [ngClass]=\"{ enabled: !MyPlayedQuote() && !IAmTheDealer() }\"\n                    -->\n                    class=\"list-group-item\" >\n                    {{item}}\n                </li>\n            </ul>\n          </div>\n    </div>"
+module.exports = "<div class=\"row\" >\n    <div class=\"col-md-4\">\n        \n        <div class=\"card\" >\n            <div class=\"card-header\">My Log {{Me.Name}} </div>\n            <ul class=\"list-group list-group-flush my-log\">\n                <li *ngFor=\"let item of Me.MyLog\" \n                    (click)=\"SubmitLog($event, item)\"\n                    class=\"list-group-item my-log\" >\n                    {{item}}\n                </li>\n            </ul>\n          </div>\n    </div>"
 
 /***/ }),
 
@@ -154,16 +156,23 @@ var http_1 = __webpack_require__("./node_modules/@angular/http/esm5/http.js");
 var router_1 = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
 var ex_1 = __webpack_require__("./src/app/models/ex.ts");
 var messages_service_1 = __webpack_require__("./src/app/services/messages.service.ts");
+var exercise_service_1 = __webpack_require__("./src/app/services/exercise.service.ts");
 var ExerciseComponent = /** @class */ (function () {
     function ExerciseComponent(//add in services
-        http, _Router, _Messages) {
+        http, _Router, _Messages, _Exercise) {
         var _this = this;
         this.http = http;
         this._Router = _Router;
         this._Messages = _Messages;
+        this._Exercise = _Exercise;
         this.Model = new ex_1.Ex();
         // A:Activity;
         this._api = "http://localhost:8080/exercise";
+        this.Me = _Exercise.Me;
+        if (!this.Me) {
+            _Router.navigate(['/login']);
+        }
+        this.join(this.Me.Name);
         setInterval(function () { return _this.refresh(); }, 1000);
     }
     ExerciseComponent.prototype.ngOnInit = function () {
@@ -179,14 +188,17 @@ var ExerciseComponent = /** @class */ (function () {
         this.http.post(this._api + "/log", { Text: text, User: this.Me.Name })
             .subscribe(function (data) {
             if (data.json().success) {
-                _this.Me.MyLog.splice(0, 1); //edit this
+                _this.Me.MyLog.splice(_this.Me.MyLog.indexOf(text), 1); //edit this
             }
         }, function (err) {
             console.log(err);
         });
     };
     ExerciseComponent.prototype.join = function (name) {
-        this._Messages.Messages.push({ Text: 'Welcome', Type: 'info' });
+        var _this = this;
+        this._Messages.Messages.push({ Text: 'Welcome' + name + '!', Type: 'info' });
+        this.http.get(this._api + "/log", { params: {} }) //params??
+            .subscribe(function (data) { return _this.Me.MyLog = data.json(); });
     };
     ExerciseComponent = __decorate([
         core_1.Component({
@@ -196,7 +208,8 @@ var ExerciseComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [http_1.Http,
             router_1.Router,
-            messages_service_1.MessagesService])
+            messages_service_1.MessagesService,
+            exercise_service_1.ExerciseService])
     ], ExerciseComponent);
     return ExerciseComponent;
 }());
@@ -215,7 +228,7 @@ module.exports = ""
 /***/ "./src/app/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div id=\"alerts\"></div>\n  <div class=\"alert alert-info\">\n        <a href=\"/login\" class=\"btn btn-info\">Login</a>\n        <a href=\"/register\" class=\"btn btn-info\">Register</a>\n   </div>\n   <!--<div class=\"alert alert-info\">\n    <b>New!</b> You can now complete daily tasks!\n    <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n        <span aria-hidden=\"true\">&times;</span>\n    </button>\n    </div>-->\n\n  <div class=\"row\">\n      <div class=\"col-lg-4 col-sm-6\">\n              <div class=\"card\" >\n                  <div class=\"card-header\" style=\"background:linear-gradient(to bottom, #E684AE,rgb(245, 165, 189))\">\n                      <h5 style=\"color:#fff\">My Log</h5>                      \n                  </div>\n                      <img class=\"\" style=\"height:255px\" src=\"https://www.inlifehealthcare.com/wp-content/uploads/2017/08/AAEAAQAAAAAAAAgzAAAAJGIyNzE4NDllLTEyNjItNGFiNC05YzRlLTU0NjU5ZDYxMjAwYw-533x400.jpg\" alt=\"Card image cap\">\n                      <div class=\"card-body\">\n                        <p class=\"card-text\">Add Cardio (running/walking)<br>Add Strength (lifting/weights)<br>Add a Sport<br>Add other exercise</p>\n                        <a href=\"/log\" class=\"btn btn-info\">Go to log</a>\n                      </div>\n                    </div>\n      </div>\n      <div class=\"col-lg-4 col-sm-6\">\n          <div class=\"card\" >\n              <div class=\"card-header\" style=\"background:linear-gradient(to bottom, #E684AE,rgb(245, 165, 189))\">\n                  <h5 style=\"color:#fff\">My History</h5>                      \n              </div>\n                  <img class=\"\" src=\"https://i.pinimg.com/originals/3a/cf/c1/3acfc1a45a7bfe2bd7f214e68f5a26e2.jpg\" alt=\"Card image cap\">\n                  <div class=\"card-body\" >\n                    <p class=\"card-text\">See your previous activity<br><br><br><br></p>\n                    <a href=\"/history\" class=\"btn btn-info\">See History</a>\n                  </div>\n                </div>\n      </div>  \n      <div class=\"col-lg-4 col-sm-6\">\n          <div class=\"card\" >\n              <div class=\"card-header\" style=\"background:linear-gradient(to bottom, #E684AE,rgb(245, 165, 189))\">\n                 <h5 style=\"color:#fff\">Share with friends</h5>                      \n              </div>\n                  <img class=\"\" style=\"height:255px\" src=\"http://sweatdallas.com/wp-content/uploads/2015/07/ClassTriColourBanner.jpg\" alt=\"Card image cap\">\n                  <div class=\"card-body\">\n                    <p class=\"card-text\">Share updates or history with friends!<br><br><br><br></p>\n                    <a href=\"/social\" class=\"btn btn-info\">Share Now!</a>\n                  </div>\n                </div>\n      </div>  \n  </div>\n</div>"
+module.exports = "<div class=\"container\">\n  <div id=\"alerts\"></div>\n  <div  class=\"alert alert-info\">\n        <a href=\"/login\" class=\"btn btn-info\">Login</a>\n        <a href=\"/register\" class=\"btn btn-info\">Register</a>\n   </div>\n   \n   <!--<div class=\"alert alert-info\">\n    <b>New!</b> You can now complete daily tasks!\n    <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n        <span aria-hidden=\"true\">&times;</span>\n    </button>\n    </div>-->\n\n  <div class=\"row\">\n      <div class=\"col-lg-4 col-sm-6\">\n              <div class=\"card\" >\n                  <div class=\"card-header\" style=\"background:linear-gradient(to bottom, #E684AE,rgb(245, 165, 189))\">\n                      <h5 style=\"color:#fff\">My Log</h5>                      \n                  </div>\n                      <img class=\"\" style=\"height:255px\" src=\"https://www.inlifehealthcare.com/wp-content/uploads/2017/08/AAEAAQAAAAAAAAgzAAAAJGIyNzE4NDllLTEyNjItNGFiNC05YzRlLTU0NjU5ZDYxMjAwYw-533x400.jpg\" alt=\"Card image cap\">\n                      <div class=\"card-body\">\n                        <p class=\"card-text\">Add Cardio (running/walking)<br>Add Strength (lifting/weights)<br>Add a Sport<br>Add other exercise</p>\n                        <a href=\"/log\" class=\"btn btn-info\">Go to log</a>\n                      </div>\n                    </div>\n      </div>\n      <div class=\"col-lg-4 col-sm-6\">\n          <div class=\"card\" >\n              <div class=\"card-header\" style=\"background:linear-gradient(to bottom, #E684AE,rgb(245, 165, 189))\">\n                  <h5 style=\"color:#fff\">My History</h5>                      \n              </div>\n                  <img class=\"\" src=\"https://i.pinimg.com/originals/3a/cf/c1/3acfc1a45a7bfe2bd7f214e68f5a26e2.jpg\" alt=\"Card image cap\">\n                  <div class=\"card-body\" >\n                    <p class=\"card-text\">See your previous activity<br><br><br><br></p>\n                    <a href=\"/history\" class=\"btn btn-info\">See History</a>\n                  </div>\n                </div>\n      </div>  \n      <div class=\"col-lg-4 col-sm-6\">\n          <div class=\"card\" >\n              <div class=\"card-header\" style=\"background:linear-gradient(to bottom, #E684AE,rgb(245, 165, 189))\">\n                 <h5 style=\"color:#fff\">Share with friends</h5>                      \n              </div>\n                  <img class=\"\" style=\"height:255px\" src=\"http://sweatdallas.com/wp-content/uploads/2015/07/ClassTriColourBanner.jpg\" alt=\"Card image cap\">\n                  <div class=\"card-body\">\n                    <p class=\"card-text\">Share updates or history with friends!<br><br><br><br></p>\n                    <a href=\"/social\" class=\"btn btn-info\">Share Now!</a>\n                  </div>\n                </div>\n      </div>  \n  </div>\n</div>"
 
 /***/ }),
 
@@ -236,9 +249,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var messages_service_1 = __webpack_require__("./src/app/services/messages.service.ts");
+var ex_1 = __webpack_require__("./src/app/models/ex.ts");
 var HomeComponent = /** @class */ (function () {
     function HomeComponent(_Messages) {
+        var _this = this;
         this._Messages = _Messages;
+        this.Model = new ex_1.Ex();
+        this.LoggedIn = function () { return _this.Model.Users.find(function (x) { return x.Name == _this.Me.Name; }); };
         this._Messages.Messages.push({ Text: 'New! You can now complete daily tasks!', Type: 'info' });
     }
     HomeComponent.prototype.ngOnInit = function () {
@@ -296,6 +313,7 @@ var LoginComponent = /** @class */ (function () {
     LoginComponent.prototype.ngOnInit = function () {
     };
     LoginComponent.prototype.login = function (name, password) {
+        console.log('in lc');
         this._Ex.login(name, password);
     };
     LoginComponent = __decorate([
@@ -447,6 +465,56 @@ exports.NavComponent = NavComponent;
 
 /***/ }),
 
+/***/ "./src/app/register/register.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/register/register.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"col\">\n    <input #Name placeholder=\"User Name\" />\n    <input #Password placeholder=\"Password\" />\n    <button (click)=\"login(Name.value, Password.value)\" >Login</button>\n </div>"
+
+/***/ }),
+
+/***/ "./src/app/register/register.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var RegisterComponent = /** @class */ (function () {
+    function RegisterComponent() {
+    }
+    RegisterComponent.prototype.ngOnInit = function () {
+    };
+    RegisterComponent = __decorate([
+        core_1.Component({
+            selector: 'app-register',
+            template: __webpack_require__("./src/app/register/register.component.html"),
+            styles: [__webpack_require__("./src/app/register/register.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], RegisterComponent);
+    return RegisterComponent;
+}());
+exports.RegisterComponent = RegisterComponent;
+
+
+/***/ }),
+
 /***/ "./src/app/services/exercise.service.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -473,10 +541,12 @@ var ExerciseService = /** @class */ (function () {
         this._Router = _Router;
     }
     ExerciseService.prototype.login = function (name, password) {
-        if (password == 'a123') {
+        if (password == '123') {
             //log the user in
-            this.Me = { Name: name, MyLog: [], MyHistory: [] };
-            this._Router.navigate(['/log']);
+            console.log('in ex service: login');
+            this.Me = { Name: name, UserId: name, MyLog: [], MyHistory: [] };
+            console.log(this.Me);
+            this._Router.navigate(['/home']);
         }
     };
     ExerciseService = __decorate([

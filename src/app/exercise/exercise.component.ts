@@ -3,6 +3,7 @@ import { Http } from "@angular/http";
 import { Router } from '@angular/router';
 import { Ex, User, Activity} from '../models/ex'; 
 import { MessagesService } from '../services/messages.service';
+import { ExerciseService } from '../services/exercise.service';
 @Component({
   selector: 'app-exercise',
   templateUrl: './exercise.component.html',
@@ -18,9 +19,16 @@ export class ExerciseComponent implements OnInit {
   constructor(//add in services
     private http:Http,
     private _Router:Router,
-    private _Messages:MessagesService
+    private _Messages:MessagesService,
+    private _Exercise:ExerciseService
   ) { 
-    
+    this.Me=_Exercise.Me;
+    if(!this.Me)
+    {
+      _Router.navigate(['/login']);
+    }
+    this.join(this.Me.Name);
+
     setInterval(()=> this.refresh(), 1000)
   }
 
@@ -37,14 +45,16 @@ export class ExerciseComponent implements OnInit {
     this.http.post(this._api + "/log", { Text: text, User: this.Me.Name })
         .subscribe(data=> {
             if(data.json().success){
-                this.Me.MyLog.splice(0, 1 );//edit this
+                this.Me.MyLog.splice(this.Me.MyLog.indexOf(text), 1 );//edit this
             }
         }, err=> {
             console.log(err);
         });
   }
   join(name:string){
-    this._Messages.Messages.push({Text:'Welcome',Type:'info'});
+    this._Messages.Messages.push({Text:'Welcome'+name+'!',Type:'info'});
+    this.http.get(this._api+"/log",{params:{}})//params??
+    .subscribe(data=>this.Me.MyLog=data.json())
   }
 
 }
