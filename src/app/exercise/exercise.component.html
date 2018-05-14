@@ -1,12 +1,28 @@
 <div class="row" >
     <div class="col-md-4">
-        
+            <div class="card" >
+                    <div class="card-header">Log Entry</div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col">
+                          <input #Act placeholder="Activity" />
+                          <input #Details placeholder="Details" />
+                          <button (click)="submit(Act.value+' '+Details.value)">Share</button>
+                          <button (click)="log(Act.value+' '+Details.value)" >Enter</button>
+                       </div>
+                      </div>
+                    </div>
+            </div>
+    
+
+
+<br>
         <div class="card" >
             <div class="card-header">My Log {{Me.Name}} </div>
             <ul class="list-group list-group-flush my-log">
                 <li *ngFor="let item of Me.MyLog" 
-                    (click)="SubmitLog($event, item)"
                     class="list-group-item my-log" >
+                    <button (click)="SubmitLog($event, item)" class="btn btn-sm btn-info">Submit</button>
                     {{item}}
                 </li>
             </ul>
@@ -26,4 +42,20 @@
                 </ul>
                 </div>
        </div>
+    <br>
+    <div class="col-md-4">
+        <div class="card" >
+            <div class="card-header">Shared Activities </div>
+                <ul class="list-group list-group-flush ">
+                <li *ngFor="let act of Model.SharedLog"
+                    class="list-group-item d-flex justify-content-between align-items-center ">
+                    {{act.Text}}
+                    <span *ngIf="act.chosen" class="badge badge-info">{{act.UserId}}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
+
+
+

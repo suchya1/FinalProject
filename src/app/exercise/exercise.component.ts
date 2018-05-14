@@ -13,7 +13,6 @@ export class ExerciseComponent implements OnInit {
 
   Model = new Ex();
   Me: User;
-  Act=["running","walking","lifting","swimming","soccer"];
  // A:Activity;
   private _api = "http://localhost:8080/exercise";
 
@@ -52,12 +51,26 @@ export class ExerciseComponent implements OnInit {
             console.log(err);
         });
   }
+  
+  //joins a user to the app
   join(name:string){
     this._Messages.Messages.push({Text:'Welcome '+name+'!',Type:'info'});
-    console.log(this.Act);
-    this.http.get(this._api+"/exercise",{params:{UserId:name,Name:name,MyLog:this.Act,MyHistory:[]}}
+    this.http.get(this._api+"/exercise",{params:{UserId:name,Name:name,MyLog:["running","walking","lifting","swimming","soccer"],MyHistory:[]}}
     )
     .subscribe(data=>this.Me.MyLog=data.json())
   }
 
+  //logs activity
+  log(act:string)
+    {
+      this.Me.MyLog.push(act);
+      console.log(this.Me.MyLog);
+    } 
+    //submits activity to share
+    submit(act:string)   
+    {
+      this.Me.MyLog.push(act);
+      this.Model.SharedLog.push({Text:act,UserId:this.Me.Name,Chosen:true});
+      console.log(this.Model.SharedLog);
+    }
 }

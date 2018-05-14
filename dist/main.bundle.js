@@ -133,7 +133,7 @@ module.exports = ""
 /***/ "./src/app/exercise/exercise.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\" >\n    <div class=\"col-md-4\">\n        \n        <div class=\"card\" >\n            <div class=\"card-header\">My Log {{Me.Name}} </div>\n            <ul class=\"list-group list-group-flush my-log\">\n                <li *ngFor=\"let item of Me.MyLog\" \n                    (click)=\"SubmitLog($event, item)\"\n                    class=\"list-group-item my-log\" >\n                    {{item}}\n                </li>\n            </ul>\n          </div>\n    </div>\n</div>\n<br>\n<div class=\"row\">\n<div class=\"col-md-4\">\n        <div class=\"card\" >\n                <div class=\"card-header\">My Friends </div>\n                <ul class=\"list-group list-group-flush \">\n                    <li *ngFor=\"let item of Model.Users\" \n                        class=\"list-group-item \" >\n                        {{item.Name}}\n                    </li>\n                </ul>\n                </div>\n       </div>\n</div>"
+module.exports = "<div class=\"row\" >\n    <div class=\"col-md-4\">\n            <div class=\"card\" >\n                    <div class=\"card-header\">Log Entry</div>\n                    <div class=\"card-body\">\n                      <div class=\"row\">\n                        <div class=\"col\">\n                          <input #Act placeholder=\"Activity\" />\n                          <input #Details placeholder=\"Details\" />\n                          <button (click)=\"submit(Act.value+' '+Details.value)\">Share</button>\n                          <button (click)=\"log(Act.value+' '+Details.value)\" >Enter</button>\n                       </div>\n                      </div>\n                    </div>\n            </div>\n    \n\n\n<br>\n        <div class=\"card\" >\n            <div class=\"card-header\">My Log {{Me.Name}} </div>\n            <ul class=\"list-group list-group-flush my-log\">\n                <li *ngFor=\"let item of Me.MyLog\" \n                    class=\"list-group-item my-log\" >\n                    <button (click)=\"SubmitLog($event, item)\" class=\"btn btn-sm btn-info\">Submit</button>\n                    {{item}}\n                </li>\n            </ul>\n          </div>\n    </div>\n</div>\n<br>\n<div class=\"row\">\n<div class=\"col-md-4\">\n        <div class=\"card\" >\n                <div class=\"card-header\">My Friends </div>\n                <ul class=\"list-group list-group-flush \">\n                    <li *ngFor=\"let item of Model.Users\" \n                        class=\"list-group-item \" >\n                        {{item.Name}}\n                    </li>\n                </ul>\n                </div>\n       </div>\n    <br>\n    <div class=\"col-md-4\">\n        <div class=\"card\" >\n            <div class=\"card-header\">Shared Activities </div>\n                <ul class=\"list-group list-group-flush \">\n                <li *ngFor=\"let act of Model.SharedLog\"\n                    class=\"list-group-item d-flex justify-content-between align-items-center \">\n                    {{act.Text}}\n                    <span *ngIf=\"act.chosen\" class=\"badge badge-info\">{{act.UserId}}</span>\n                </li>\n            </ul>\n        </div>\n    </div>\n</div>\n\n\n\n"
 
 /***/ }),
 
@@ -167,7 +167,6 @@ var ExerciseComponent = /** @class */ (function () {
         this._Messages = _Messages;
         this._Exercise = _Exercise;
         this.Model = new ex_1.Ex();
-        this.Act = ["running", "walking", "lifting", "swimming", "soccer"];
         // A:Activity;
         this._api = "http://localhost:8080/exercise";
         this.Me = _Exercise.Me;
@@ -196,12 +195,23 @@ var ExerciseComponent = /** @class */ (function () {
             console.log(err);
         });
     };
+    //joins a user to the app
     ExerciseComponent.prototype.join = function (name) {
         var _this = this;
         this._Messages.Messages.push({ Text: 'Welcome ' + name + '!', Type: 'info' });
-        console.log(this.Act);
-        this.http.get(this._api + "/exercise", { params: { UserId: name, Name: name, MyLog: this.Act, MyHistory: [] } })
+        this.http.get(this._api + "/exercise", { params: { UserId: name, Name: name, MyLog: ["running", "walking", "lifting", "swimming", "soccer"], MyHistory: [] } })
             .subscribe(function (data) { return _this.Me.MyLog = data.json(); });
+    };
+    //logs activity
+    ExerciseComponent.prototype.log = function (act) {
+        this.Me.MyLog.push(act);
+        console.log(this.Me.MyLog);
+    };
+    //submits activity to share
+    ExerciseComponent.prototype.submit = function (act) {
+        this.Me.MyLog.push(act);
+        this.Model.SharedLog.push({ Text: act, UserId: this.Me.Name, Chosen: true });
+        console.log(this.Model.SharedLog);
     };
     ExerciseComponent = __decorate([
         core_1.Component({

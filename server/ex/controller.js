@@ -17,7 +17,7 @@ module.exports = app
             res.status(403).send({success:false,message:error.message});
         }
     })
-    .get('/log',(req,res)=>
+    .get('/exercise',(req,res)=>
     res.send(exercise.GetLog(req.query.UserId))
     )
     
