@@ -12,3 +12,18 @@
             </ul>
           </div>
     </div>
+</div>
+<br>
+<div class="row">
+<div class="col-md-4">
+        <div class="card" >
+                <div class="card-header">My Friends </div>
+                <ul class="list-group list-group-flush ">
+                    <li *ngFor="let item of Model.Users" 
+                        class="list-group-item " >
+                        {{item.Name}}
+                    </li>
+                </ul>
+                </div>
+       </div>
+</div>

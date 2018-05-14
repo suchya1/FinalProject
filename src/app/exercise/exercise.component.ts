@@ -13,6 +13,7 @@ export class ExerciseComponent implements OnInit {
 
   Model = new Ex();
   Me: User;
+  Act=["running","walking","lifting","swimming","soccer"];
  // A:Activity;
   private _api = "http://localhost:8080/exercise";
 
@@ -53,8 +54,9 @@ export class ExerciseComponent implements OnInit {
   }
   join(name:string){
     this._Messages.Messages.push({Text:'Welcome '+name+'!',Type:'info'});
-    this.http.get(this._api+"/exercise",{params:{UserId:name,Name:name,MyLog:Activity,MyHistory:[]}}
-    )//params??
+    console.log(this.Act);
+    this.http.get(this._api+"/exercise",{params:{UserId:name,Name:name,MyLog:this.Act,MyHistory:[]}}
+    )
     .subscribe(data=>this.Me.MyLog=data.json())
   }
 

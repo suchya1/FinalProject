@@ -133,7 +133,7 @@ module.exports = ""
 /***/ "./src/app/exercise/exercise.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\" >\n    <div class=\"col-md-4\">\n        \n        <div class=\"card\" >\n            <div class=\"card-header\">My Log {{Me.Name}} </div>\n            <ul class=\"list-group list-group-flush my-log\">\n                <li *ngFor=\"let item of Me.MyLog\" \n                    (click)=\"SubmitLog($event, item)\"\n                    class=\"list-group-item my-log\" >\n                    {{item}}\n                </li>\n            </ul>\n          </div>\n    </div>"
+module.exports = "<div class=\"row\" >\n    <div class=\"col-md-4\">\n        \n        <div class=\"card\" >\n            <div class=\"card-header\">My Log {{Me.Name}} </div>\n            <ul class=\"list-group list-group-flush my-log\">\n                <li *ngFor=\"let item of Me.MyLog\" \n                    (click)=\"SubmitLog($event, item)\"\n                    class=\"list-group-item my-log\" >\n                    {{item}}\n                </li>\n            </ul>\n          </div>\n    </div>\n</div>\n<br>\n<div class=\"row\">\n<div class=\"col-md-4\">\n        <div class=\"card\" >\n                <div class=\"card-header\">My Friends </div>\n                <ul class=\"list-group list-group-flush \">\n                    <li *ngFor=\"let item of Model.Users\" \n                        class=\"list-group-item \" >\n                        {{item.Name}}\n                    </li>\n                </ul>\n                </div>\n       </div>\n</div>"
 
 /***/ }),
 
@@ -167,6 +167,7 @@ var ExerciseComponent = /** @class */ (function () {
         this._Messages = _Messages;
         this._Exercise = _Exercise;
         this.Model = new ex_1.Ex();
+        this.Act = ["running", "walking", "lifting", "swimming", "soccer"];
         // A:Activity;
         this._api = "http://localhost:8080/exercise";
         this.Me = _Exercise.Me;
@@ -198,7 +199,8 @@ var ExerciseComponent = /** @class */ (function () {
     ExerciseComponent.prototype.join = function (name) {
         var _this = this;
         this._Messages.Messages.push({ Text: 'Welcome ' + name + '!', Type: 'info' });
-        this.http.get(this._api + "/exercise", { params: { UserId: name, Name: name, MyLog: ex_1.Activity, MyHistory: [] } }) //params??
+        console.log(this.Act);
+        this.http.get(this._api + "/exercise", { params: { UserId: name, Name: name, MyLog: this.Act, MyHistory: [] } })
             .subscribe(function (data) { return _this.Me.MyLog = data.json(); });
     };
     ExerciseComponent = __decorate([
@@ -443,6 +445,7 @@ var Ex = /** @class */ (function () {
 exports.Ex = Ex;
 var User = /** @class */ (function () {
     function User() {
+        this.MyLog = ["running", "walking", "lifting", "swimming", "soccer"];
     }
     return User;
 }());
