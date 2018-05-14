@@ -42,7 +42,7 @@ export class ExerciseComponent implements OnInit {
   submitLog(e: MouseEvent, text: string){
     e.preventDefault();
 
-    this.http.post(this._api + "/log", { Text: text, User: this.Me.Name })
+    this.http.post(this._api + "/exercise", { Text: text, User: this.Me.Name })
         .subscribe(data=> {
             if(data.json().success){
                 this.Me.MyLog.splice(this.Me.MyLog.indexOf(text), 1 );//edit this
@@ -52,8 +52,9 @@ export class ExerciseComponent implements OnInit {
         });
   }
   join(name:string){
-    this._Messages.Messages.push({Text:'Welcome'+name+'!',Type:'info'});
-    this.http.get(this._api+"/log",{params:{}})//params??
+    this._Messages.Messages.push({Text:'Welcome '+name+'!',Type:'info'});
+    this.http.get(this._api+"/exercise",{params:{UserId:name,Name:name,MyLog:Activity,MyHistory:[]}}
+    )//params??
     .subscribe(data=>this.Me.MyLog=data.json())
   }
 

@@ -17,13 +17,19 @@ export class ExerciseService {
        console.log('in ex service: login');
        this.Me={Name:name,UserId:name,MyLog:[],MyHistory:[]};
        console.log(this.Me);
-       this._Router.navigate(['/home']);
+       this._Router.navigate(['/exercise']);
     }
+  }
+  register(name:string,age:string,fname:string,password:string){
+    console.log('in ex service: reg');
+       this.Me={Name:fname,UserId:name,MyLog:[],MyHistory:[]};
+       console.log(this.Me);
+       this._Router.navigate(['/exercise']);
   }
   oAuthLogin(name:string,token:string,pic:string){
     this.Me={Name:name,UserId:name, MyLog:[],MyHistory:[]};
     this.pic=pic;
     this.token=token;
-    this._Router.navigate(['/home']);
+    this._Router.navigate(['/exercise']);
   }
 }

@@ -31,6 +31,7 @@ import { RegisterComponent } from './register/register.component';
       { path: 'home', component: HomeComponent },
       { path: 'exercise', component: ExerciseComponent },
       { path: 'login', component: LoginComponent },
+      { path: 'register', component: RegisterComponent },
       { path: '', redirectTo: '/home', pathMatch: 'full'}
     ])
    ],

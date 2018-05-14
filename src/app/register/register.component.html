@@ -1,5 +1,7 @@
 <div class="col">
     <input #Name placeholder="User Name" />
+    <input #Age placeholder="Age!" />
+    <input #FName placeholder="First Name" />
     <input #Password placeholder="Password" />
-    <button (click)="login(Name.value, Password.value)" >Login</button>
+    <button (click)="register(Name.value,Age.value,FName.value,Password.value)" >Register</button>
  </div>
