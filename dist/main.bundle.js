@@ -78,6 +78,7 @@ var platform_browser_1 = __webpack_require__("./node_modules/@angular/platform-b
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var router_1 = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
 var http_1 = __webpack_require__("./node_modules/@angular/http/esm5/http.js");
+var ng_bootstrap_1 = __webpack_require__("./node_modules/@ng-bootstrap/ng-bootstrap/index.js");
 var app_component_1 = __webpack_require__("./src/app/app.component.ts");
 var home_component_1 = __webpack_require__("./src/app/home/home.component.ts");
 var nav_component_1 = __webpack_require__("./src/app/nav/nav.component.ts");
@@ -87,6 +88,7 @@ var exercise_component_1 = __webpack_require__("./src/app/exercise/exercise.comp
 var messages_service_1 = __webpack_require__("./src/app/services/messages.service.ts");
 var exercise_service_1 = __webpack_require__("./src/app/services/exercise.service.ts");
 var register_component_1 = __webpack_require__("./src/app/register/register.component.ts");
+var forms_1 = __webpack_require__("./node_modules/@angular/forms/esm5/forms.js");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -104,6 +106,8 @@ var AppModule = /** @class */ (function () {
             imports: [
                 platform_browser_1.BrowserModule,
                 http_1.HttpModule,
+                ng_bootstrap_1.NgbModule.forRoot(),
+                forms_1.FormsModule,
                 router_1.RouterModule.forRoot([
                     { path: 'home', component: home_component_1.HomeComponent },
                     { path: 'exercise', component: exercise_component_1.ExerciseComponent },
@@ -112,7 +116,7 @@ var AppModule = /** @class */ (function () {
                     { path: '', redirectTo: '/home', pathMatch: 'full' }
                 ])
             ],
-            providers: [messages_service_1.MessagesService, exercise_service_1.ExerciseService],
+            providers: [messages_service_1.MessagesService, exercise_service_1.ExerciseService, exercise_component_1.lookAhead],
             bootstrap: [app_component_1.AppComponent]
         })
     ], AppModule);
@@ -133,7 +137,7 @@ module.exports = ""
 /***/ "./src/app/exercise/exercise.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\" >\n    <div class=\"col-md-4\">\n            <div class=\"card\" >\n                    <div class=\"card-header\">Log Entry</div>\n                    <div class=\"card-body\">\n                      <div class=\"row\">\n                        <div class=\"col\">\n                          <input #Act placeholder=\"Activity\" />\n                          <input #Details placeholder=\"Details\" />\n                          <button (click)=\"submit(Act.value+' '+Details.value)\">Share</button>\n                          <button (click)=\"log(Act.value+' '+Details.value)\" >Enter</button>\n                       </div>\n                      </div>\n                    </div>\n            </div>\n    \n\n\n<br>\n        <div class=\"card\" >\n            <div class=\"card-header\">My Log {{Me.Name}} </div>\n            <ul class=\"list-group list-group-flush my-log\">\n                <li *ngFor=\"let item of Me.MyLog\" \n                    class=\"list-group-item my-log\" >\n                    <button (click)=\"share(item)\" class=\"btn btn-sm btn-info\">Submit</button>\n                    {{item}}\n                </li>\n            </ul>\n          </div>\n    </div>\n</div>\n<br>\n<div class=\"row\">\n<div class=\"col-md-4\">\n        <div class=\"card\" >\n                <div class=\"card-header\">My Friends </div>\n                <ul class=\"list-group list-group-flush \">\n                    <li *ngFor=\"let item of Model.Users\" \n                        class=\"list-group-item \" >\n                        {{item.Name}}\n                    </li>\n                </ul>\n                </div>\n       </div>\n    <br>\n    <div class=\"col-md-4\">\n        <div class=\"card\" >\n            <div class=\"card-header\">Shared Activities </div>\n                <ul class=\"list-group list-group-flush \">\n                <li *ngFor=\"let act of Model.SharedLog\"\n                    class=\"list-group-item d-flex justify-content-between align-items-center \">\n                    {{act.Text}}\n                    <span *ngIf=\"act.chosen\" class=\"badge badge-info\">{{act.UserId}}</span>\n                </li>\n            </ul>\n        </div>\n    </div>\n</div>\n\n\n\n"
+module.exports = "<div class=\"row\" >\n    <div class=\"col-md-4\">\n            <div class=\"card\" >\n                    <div class=\"card-header\">Log Entry</div>\n                    <div class=\"card-body\">\n                      <div class=\"row\">\n                        <div class=\"col\">\n                          <input #Act placeholder=\"Activity\" />\n                          <input #Details placeholder=\"Details\" />\n                          <button (click)=\"submit(Act.value+' '+Details.value)\">Share</button>\n                          <button (click)=\"log(Act.value+' '+Details.value)\" >Enter</button>\n                       </div>\n                      </div>\n                    </div>\n            </div>\n    \n\n\n<br>\n        <div class=\"card\" >\n            <div class=\"card-header\">My Log {{Me.Name}} </div>\n            <ul class=\"list-group list-group-flush my-log\">\n                <li *ngFor=\"let item of Me.MyLog\" \n                    class=\"list-group-item my-log\" >\n                    <button (click)=\"share(item)\" class=\"btn btn-sm btn-info\">Submit</button>\n                    {{item}}\n                </li>\n            </ul>\n          </div>\n    </div>\n</div>\n<br>\n<div class=\"row\">\n<div class=\"col-md-4\">\n        <div class=\"card\" >\n                <div class=\"card-header\">My Friends </div>\n                <div class=\"card-body\">\n                        <input id=\"typeahead-basic\" type=\"text\" class=\"form-control\" [(ngModel)]=\"model\" [ngbTypeahead]=\"search\"/>\n                </div>\n                <ul class=\"list-group list-group-flush \">\n                    <li *ngFor=\"let item of Model.Users\" \n                        class=\"list-group-item \" >\n                        {{item.Name}}\n                    </li>\n                </ul>\n                </div>\n       </div>\n    <br>\n    <div class=\"col-md-4\">\n        <div class=\"card\" >\n            <div class=\"card-header\">Shared Activities </div>\n                <ul class=\"list-group list-group-flush \">\n                <li *ngFor=\"let act of Model.SharedLog\"\n                    class=\"list-group-item d-flex justify-content-between align-items-center \">\n                    {{act.Text}}\n                    <span *ngIf=\"act.chosen\" class=\"badge badge-info\">{{act.UserId}}</span>\n                </li>\n            </ul>\n        </div>\n    </div>\n</div>\n\n\n\n"
 
 /***/ }),
 
@@ -155,20 +159,35 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var http_1 = __webpack_require__("./node_modules/@angular/http/esm5/http.js");
 var router_1 = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+var http_2 = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
 var ex_1 = __webpack_require__("./src/app/models/ex.ts");
 var messages_service_1 = __webpack_require__("./src/app/services/messages.service.ts");
 var exercise_service_1 = __webpack_require__("./src/app/services/exercise.service.ts");
+var Observable_1 = __webpack_require__("./node_modules/rxjs/_esm5/Observable.js");
+var operators_1 = __webpack_require__("./node_modules/rxjs/_esm5/operators.js");
+//import {debounceTime, distinctUntilChanged, map,switchMap} from 'rxjs/operators';
+//import {Observable, of} from 'rxjs';
 var ExerciseComponent = /** @class */ (function () {
     function ExerciseComponent(//add in services
-        http, _Router, _Messages, _Exercise) {
+        http, _Router, _Messages, _Exercise, _service) {
         var _this = this;
         this.http = http;
         this._Router = _Router;
         this._Messages = _Messages;
         this._Exercise = _Exercise;
+        this._service = _service;
         this.Model = new ex_1.Ex();
         // A:Activity;
+        this.searching = false;
+        this.searchFailed = false;
+        this.hideSearchingWhenUnsubscribed = new Observable_1.Observable(function () { return function () { return _this.searching = false; }; });
         this._api = "http://localhost:8080/exercise";
+        this.search = function (text) {
+            return text.pipe(operators_1.debounceTime(300), operators_1.distinctUntilChanged(), 
+            // map(x=>[x])//shows these in output
+            //switchMap(x=>this.http.get())
+            operators_1.switchMap(function (x) { return _this._service.search(x); }));
+        };
         this.Me = _Exercise.Me;
         if (!this.Me) {
             _Router.navigate(['/login']);
@@ -199,6 +218,7 @@ var ExerciseComponent = /** @class */ (function () {
     ExerciseComponent.prototype.join = function (name) {
         var _this = this;
         this._Messages.Messages.push({ Text: 'Welcome ' + name + '!', Type: 'info' });
+        //this.Model.Users.push({UserId:name,Name:name,MyLog:["running","walking","lifting","swimming","soccer"],MyHistory:[]});
         this.http.get(this._api + "/exercise", { params: { UserId: name, Name: name, MyLog: ["running", "walking", "lifting", "swimming", "soccer"], MyHistory: [] } })
             .subscribe(function (data) { return _this.Me.MyLog = data.json(); });
     };
@@ -225,11 +245,38 @@ var ExerciseComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [http_1.Http,
             router_1.Router,
             messages_service_1.MessagesService,
-            exercise_service_1.ExerciseService])
+            exercise_service_1.ExerciseService,
+            lookAhead])
     ], ExerciseComponent);
     return ExerciseComponent;
 }());
 exports.ExerciseComponent = ExerciseComponent;
+var PARAMS = new http_2.HttpParams({
+    fromObject: {
+        action: 'opensearch',
+        format: 'json',
+        origin: '*'
+    }
+});
+var lookAhead = /** @class */ (function () {
+    function lookAhead(http) {
+        this.http = http;
+        this._api = "http://localhost:8080/game";
+    }
+    lookAhead.prototype.search = function (term) {
+        if (term === '') {
+            return String([]);
+        }
+        return this.http
+            .get(this._api, { params: PARAMS.set('search', term) }).pipe(operators_1.map(function (response) { return response[1]; }));
+    };
+    lookAhead = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [http_2.HttpClient])
+    ], lookAhead);
+    return lookAhead;
+}());
+exports.lookAhead = lookAhead;
 
 
 /***/ }),
