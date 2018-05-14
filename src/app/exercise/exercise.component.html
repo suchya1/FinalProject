@@ -22,7 +22,7 @@
             <ul class="list-group list-group-flush my-log">
                 <li *ngFor="let item of Me.MyLog" 
                     class="list-group-item my-log" >
-                    <button (click)="SubmitLog($event, item)" class="btn btn-sm btn-info">Submit</button>
+                    <button (click)="share(item)" class="btn btn-sm btn-info">Submit</button>
                     {{item}}
                 </li>
             </ul>

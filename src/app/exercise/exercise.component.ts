@@ -73,4 +73,8 @@ export class ExerciseComponent implements OnInit {
       this.Model.SharedLog.push({Text:act,UserId:this.Me.Name,Chosen:true});
       console.log(this.Model.SharedLog);
     }
+    share(act:string)
+    {
+      this.Model.SharedLog.push({Text:act,UserId:this.Me.Name,Chosen:true});
+    }
 }
